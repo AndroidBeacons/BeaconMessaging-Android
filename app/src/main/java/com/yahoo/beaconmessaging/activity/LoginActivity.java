@@ -56,8 +56,8 @@ public class LoginActivity extends Activity {
   }
 
   private void login() {
-    String username = usernameEditText.getText().toString().trim();
-    String password = passwordEditText.getText().toString().trim();
+    final String username = usernameEditText.getText().toString().trim();
+    final String password = passwordEditText.getText().toString().trim();
 
     // Validate the log in data
     boolean validationError = false;
@@ -95,10 +95,17 @@ public class LoginActivity extends Activity {
           // Show the error message
           Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         } else {
+            Intent intent;
           // Start an intent for the dispatch activity
-          Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-          startActivity(intent);
+            if (username.equals("admin"))
+            {
+                intent = new Intent(LoginActivity.this, ExhibitAddActivity.class);
+            }
+            else {
+                intent = new Intent(LoginActivity.this, HomeActivity.class);
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
       }
     });
