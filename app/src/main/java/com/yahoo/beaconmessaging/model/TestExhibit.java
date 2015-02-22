@@ -4,10 +4,8 @@ import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 
-import java.io.File;
-
-@ParseClassName("Exhibit")
-public class Exhibit extends ParseObject {
+@ParseClassName("TestExhibit")
+public class TestExhibit extends ParseObject {
     
     public String getName()
     {
@@ -41,5 +39,16 @@ public class Exhibit extends ParseObject {
     public void setFavoriteCount(int favoriteCount)
     {
         put("favoriteCount", favoriteCount);
+    }
+    
+    public void setFeatured(boolean featured)
+    {
+        put("featured", featured);
+        
+    }
+    
+    public void setImageUri(ParseFile file)
+    {
+        put("imageUri", file);
     }
 }

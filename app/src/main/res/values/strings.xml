@@ -17,4 +17,9 @@
     <string name="title_activity_exhibit">ExhibitActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_posts">PostsActivity</string>
+    <string name="title_activity_parse_test">ParseTestActivity</string>
+    <string name="exhibit_title">Exhibit title</string>
+    <string name="exhibit_description">Description</string>
+    <string name="enter_title">Exhibition title</string>
+    <string name="enter_description">Exhibit Description</string>
 </resources>
