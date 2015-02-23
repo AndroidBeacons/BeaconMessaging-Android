@@ -24,6 +24,7 @@ import com.squareup.picasso.Picasso;
 import com.yahoo.beaconmessaging.R;
 import com.yahoo.beaconmessaging.model.Exhibit;
 import com.yahoo.beaconmessaging.model.TestExhibit;
+import com.yahoo.beaconmessaging.util.ImageLoaderAndSaver;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,74 +40,62 @@ public class ExhibitAddActivity extends ActionBarActivity {
     private EditText edTitle;
     private Uri uri;
     private ParseFile imageFile;
+    private ImageLoaderAndSaver imageLoaderAndSaver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_exhibit);
+        setContentView(R.layout.activity_add_exhibit);        
         ivPicture = (ImageView)findViewById(R.id.ivPicture);
         edDescription = (EditText)findViewById(R.id.edDescription);
         edTitle = (EditText)findViewById(R.id.edTitle);
+        imageLoaderAndSaver = new ImageLoaderAndSaver(this,ivPicture);
 //        ParseObject p = new ParseObject("Exhibit");
 
     }
 
     public void onImageAdd(View view)
     {
-        String imageName = "file_" + new Random().nextInt();
-        File image;
-
-        try {
-            image = File.createTempFile(imageName, ".jpg",Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) );
-            uri = Uri.fromFile(image);
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-            if (intent.resolveActivity(getPackageManager()) != null) {
-                startActivityForResult(intent, 101);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        imageLoaderAndSaver.onImageAdd(view);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 100 && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ivPicture.setImageBitmap(imageBitmap);
-        }
-        else if (requestCode == 101 && resultCode == RESULT_OK)
-        {
-            Picasso.with(this).load(uri).into(ivPicture);
-        }
+        imageLoaderAndSaver.onActivityResult(requestCode,resultCode,data);
+    }
+    
+    public void clearFieldsAfterSave() {
+        edDescription.setText("");
+        edTitle.setText("");
+        ivPicture.setImageBitmap(null);
+        Toast.makeText(ExhibitAddActivity.this, "Exhibit data successfully saved", Toast.LENGTH_SHORT).show();            
     }
     
     public void onAdd(View view)
     {
-       new ImageFileLoadTask(new Runnable() {
+        final ParseObject exhibit = ParseObject.create(Exhibit.class);
+        exhibit.put("favoriteCount", new Random().nextInt());
+        exhibit.put("name", edTitle.getText().toString());
+        exhibit.put("description", edDescription.getText().toString());
+
+        imageLoaderAndSaver.saveImageAndCall(new SaveCallback() {
             @Override
-            public void run() {
-                Log.d("ParseTestActivity", "Completed the save of file to server");
-                ParseObject exhibit = ParseObject.create(Exhibit.class);
-                exhibit.put("favoriteCount", new Random().nextInt());
-                exhibit.put("name", edTitle.getText().toString());
-                exhibit.put("description", edDescription.getText().toString());
-                if (imageFile != null && !imageFile.isDirty())
-                {
-                    exhibit.put("imageFile",imageFile);
-                }
-                exhibit.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                exhibit.put("image",imageLoaderAndSaver.getImageFile());
+                exhibit.saveInBackground( new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-                        edDescription.setText("");
-                        edTitle.setText("");
-                        ivPicture.setImageBitmap(null);
-                        Toast.makeText(ExhibitAddActivity.this,"Exhibit data successfully saved", Toast.LENGTH_SHORT).show();
+                        if (e == null)
+                        {
+                            clearFieldsAfterSave();
+                        }
+                        else 
+                        {
+                            Toast.makeText(ExhibitAddActivity.this, "Error saving record", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
             }
-        }).execute(uri);
+        });
     }
     
     @Override
@@ -131,71 +120,4 @@ public class ExhibitAddActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     
-    private class ImageFileLoadTask extends AsyncTask<Uri,Double,byte[]> {
-        
-        private Runnable continuation;
-        public ImageFileLoadTask(Runnable continuation)
-        {
-            this.continuation = continuation;
-            
-        }
-        @Override
-        protected byte[] doInBackground(Uri... params) {
-            Log.d("ParseTestActivity", "Background task to read and save started");
-
-            Uri uri = params[0];
-            File file = new File(uri.getPath());
-            if (file.exists()) {
-                int totalLength = (int)file.length();
-                int sofar = 0;
-                Log.d("ParseTestActivity", "File length is:" + totalLength);
-
-                byte[] outputBytes = new byte[totalLength];
-                try {
-                    FileInputStream fis = new FileInputStream(file);
-                    int x = 0;
-                    
-                    while ((x = fis.read(outputBytes,sofar,(totalLength -sofar) > 1024?1024:(totalLength - sofar))) > 0)
-                    {
-                        sofar = sofar + x;
-                        Log.d("ParseTestActivity", "Read so far:" + sofar);
-                        x = 0;
-                        publishProgress(sofar/(double)totalLength);
-                    }
-                    fis.close();
-                    return outputBytes;
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                catch (IOException ioe)
-                {
-                    ioe.printStackTrace();                    
-                }
-            }
-            return new byte[0];
-        }
-
-        @Override
-        protected void onProgressUpdate(Double... values) {
-            super.onProgressUpdate(values);
-        }
-
-        @Override
-        protected void onPostExecute(byte[] bytes) {
-            if (bytes.length > 0)
-            {
-                imageFile = new ParseFile("image", bytes,"jpg");
-                imageFile.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        continuation.run();
-                    }
-                });
-            }
-            else 
-            {
-                Toast.makeText(ExhibitAddActivity.this,"Error: error reading image",Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 }

@@ -1,10 +1,79 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.yahoo.beaconmessaging.fragment.UserDetailFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/ivProfileImage"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:labelFor="@string/get_your_photo_here"
+        android:background="@color/material_blue_grey_900" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/tvName"
+        android:layout_alignParentTop="true"
+        android:paddingTop="10dp"
+        android:layout_toRightOf="@+id/ivProfileImage"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Medium Text"
+        android:id="@+id/tvDescription"
+        android:paddingTop="5dp"
+        android:layout_toRightOf="@+id/ivProfileImage"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:layout_below="@+id/tvName"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivProfileImage">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/txt_favorite_count"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/tvFavoriteCount"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/txt_post_count"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/tvPostCount"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

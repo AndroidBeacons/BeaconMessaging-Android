@@ -1,14 +1,16 @@
 package com.yahoo.beaconmessaging.activity;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.parse.ParseUser;
 import com.yahoo.beaconmessaging.R;
 
 
-public class HomeActivity extends ActionBarActivity {
+public class HomeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,13 @@ public class HomeActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        else if (id == R.id.action_profile)
+        {
+            Intent i = new Intent(this, ProfileActivity.class);
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            i.putExtra("user", currentUser.getObjectId());
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);
