@@ -4,14 +4,22 @@
 
     <!-- Login form -->
 
-    <ScrollView
-        android:id="@+id/signup_form"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <LinearLayout
-            style="@style/LoginFormContainer"
-            android:orientation="vertical" >
+    <ImageView
+        android:src="@drawable/nature"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:scaleType="fitXY"
+        />
+    <LinearLayout
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:background="#66666644"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical" >
 
             <EditText
                 android:id="@+id/username_edit_text"
@@ -53,6 +61,5 @@
                 android:paddingRight="32dp"
                 android:text="@string/signup" />
         </LinearLayout>
-    </ScrollView>
 
 </merge>
