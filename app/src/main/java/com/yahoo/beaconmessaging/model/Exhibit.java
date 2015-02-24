@@ -8,38 +8,46 @@ import java.io.File;
 
 @ParseClassName("Exhibit")
 public class Exhibit extends ParseObject {
-    
-    public String getName()
-    {
+
+    public String getName() {
         return getString("name");
     }
-    
-    public String getDescription()
-    {
-        return getString("description");        
+
+    public String getDescription() {
+        return getString("description");
     }
-    
-    public int getFavoriteCount()
-    {
-        return getInt("favoriteCount");        
+
+    public int getFavoriteCount() {
+        return getInt("favoriteCount");
     }
-    
-    public boolean getFeatured() { return  getBoolean("featured");}
-    
-    public ParseFile getImageUri() { return getParseFile("image");}
-    
-    public void setName(String name)
-    {
-        put("name", name);        
+
+    public boolean getFeatured() {
+        return getBoolean("featured");
     }
-    
-    public void setDescription(String description)
-    {
-        put("description", description);        
+
+    public ParseFile getImageUri() {
+        return getParseFile("image");
     }
-    
-    public void setFavoriteCount(int favoriteCount)
-    {
+
+    public int getPostCount() {
+        return getInt("postCount");
+    }
+
+    public void setName(String name) {
+        put("name", name);
+    }
+
+    public void setDescription(String description) {
+        put("description", description);
+    }
+
+    public void setFavoriteCount(int favoriteCount) {
         put("favoriteCount", favoriteCount);
     }
+
+    public void setPostCount(int postCount) {
+        put("postCount", postCount);
+    }
+
+  
 }
