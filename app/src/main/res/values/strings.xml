@@ -22,9 +22,11 @@
     <string name="exhibit_description">Description</string>
     <string name="enter_title">Exhibition title</string>
     <string name="enter_description">Exhibit Description</string>
-    <string name="txt_favorite_count">likes</string>
-    <string name="txt_post_count">posts</string>
+    <string name="txt_favorite_count">likes  </string>
+    <string name="txt_post_count">posts  </string>
     <string name="action_profile">Profile</string>
     <string name="get_your_photo_here">Get Your Photo Here</string>
     <string name="action_logout">log out</string>
+    <string name="defaultFavoriteCount">0</string>
+    <string name="defaultPostCount">0</string>
 </resources>

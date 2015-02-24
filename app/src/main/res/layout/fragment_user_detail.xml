@@ -3,6 +3,11 @@
     android:layout_height="match_parent"
     tools:context="com.yahoo.beaconmessaging.fragment.UserDetailFragment">
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:id="@+id/rlHeader"
+        android:padding="2dp"
+        android:layout_height="wrap_content">
 
     <ImageView
         android:layout_width="100dp"
@@ -11,6 +16,7 @@
         android:layout_alignParentTop="true"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
+        android:scaleType="fitXY"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:labelFor="@string/get_your_photo_here"
@@ -42,10 +48,28 @@
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp" />
 
+    </RelativeLayout>
+    
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ivProfileImage">
+        android:layout_marginRight="2dp"
+        android:layout_marginLeft="2dp"
+        android:background="#AAAAAA44"
+        android:layout_below="@+id/rlHeader">
+        <Space
+            android:layout_width="2dp"
+            android:layout_height="fill_parent" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/tvFavoriteCount"
+            android:text="@string/defaultFavoriteCount"
+            android:paddingRight="2dp"
+            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,11 +77,17 @@
             android:text="@string/txt_favorite_count"
             />
 
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="fill_parent" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/tvFavoriteCount"
+            android:id="@+id/tvPostCount"
+            android:text="@string/defaultPostCount"
+            android:paddingRight="2dp"
             />
 
         <TextView
@@ -67,12 +97,6 @@
             android:text="@string/txt_post_count"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/tvPostCount"
-            />
 
     </LinearLayout>
 
