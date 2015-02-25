@@ -80,7 +80,7 @@ public class ExhibitAddActivity extends ActionBarActivity {
         imageLoaderAndSaver.saveImageAndCall(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                exhibit.put("image",imageLoaderAndSaver.getImageFile());
+                exhibit.put("imageFile",imageLoaderAndSaver.getImageFile());
                 exhibit.saveInBackground( new SaveCallback() {
                     @Override
                     public void done(ParseException e) {

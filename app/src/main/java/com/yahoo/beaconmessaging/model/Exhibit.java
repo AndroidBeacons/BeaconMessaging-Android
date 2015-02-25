@@ -29,7 +29,7 @@ public class Exhibit extends ParseObject {
     }
 
     public ParseFile getImageUri() {
-        return getParseFile("image");
+        return getParseFile("imageFile");
     }
 
     public int getPostCount() {
