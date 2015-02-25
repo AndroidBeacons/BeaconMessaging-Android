@@ -72,7 +72,7 @@ public class ExhibitRecyclerAdapter extends RecyclerView.Adapter<ExhibitRecycler
         }
     }
     
-    public void addItemsToList(ArrayList<Exhibit> items){
+    public void addItemsToList(List<Exhibit> items){
         this.mExhibitItems.addAll(items);
         
     }

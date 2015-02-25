@@ -1,10 +1,13 @@
 package com.yahoo.beaconmessaging.model;
 
+import com.parse.FindCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.io.File;
+import java.util.List;
 
 @ParseClassName("Exhibit")
 public class Exhibit extends ParseObject {
@@ -50,4 +53,11 @@ public class Exhibit extends ParseObject {
     }
 
   
+    
+    public static void getPopularExhibits(FindCallback<Exhibit> findCallback)
+    {
+        ParseQuery<Exhibit> query = ParseQuery.getQuery(Exhibit.class);
+        query.whereEqualTo("featured", true);
+        query.findInBackground(findCallback);
+    }
 }

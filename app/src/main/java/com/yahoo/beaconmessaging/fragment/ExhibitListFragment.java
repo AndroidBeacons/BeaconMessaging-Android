@@ -15,6 +15,7 @@ import com.yahoo.beaconmessaging.adapter.ExhibitRecyclerAdapter;
 import com.yahoo.beaconmessaging.model.Exhibit;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,7 +93,7 @@ public abstract class ExhibitListFragment extends Fragment {
      * * Protected methods
      * * */
     
-    protected void addExhibits(ArrayList<Exhibit> newExhibits, boolean isRefresh){
+    protected void addExhibits(List<Exhibit> newExhibits, boolean isRefresh){
         if(isRefresh){
             /*
             * exhibitList.clear()
