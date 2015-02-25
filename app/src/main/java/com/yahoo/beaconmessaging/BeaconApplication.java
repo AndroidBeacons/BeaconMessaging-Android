@@ -10,6 +10,7 @@ import com.parse.ParseUser;
 import com.yahoo.beaconmessaging.model.Comment;
 import com.yahoo.beaconmessaging.model.Exhibit;
 import com.yahoo.beaconmessaging.model.Post;
+import com.yahoo.beaconmessaging.util.LoginManager;
 
 
 public class BeaconApplication extends Application {
@@ -29,6 +30,7 @@ public class BeaconApplication extends Application {
         Parse.initialize(this, "ggsnTmPvdqzCwYLs8diabLA3m0nNgYa75qMkN8l5", "vk5z5IXl2TCizhi8u68fvSWylBXcmMOcWIWKYMcH");
         preferences = getSharedPreferences("com.yahoo.beaconmessaging", Context.MODE_PRIVATE);
 
+        LoginManager.init(context);
     }
 
 }

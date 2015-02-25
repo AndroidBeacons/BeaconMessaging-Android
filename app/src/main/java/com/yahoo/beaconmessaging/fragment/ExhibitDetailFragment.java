@@ -1,8 +1,10 @@
 package com.yahoo.beaconmessaging.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yahoo.beaconmessaging.R;
+import com.yahoo.beaconmessaging.button.FloatingActionButton;
 import com.yahoo.beaconmessaging.model.Exhibit;
 
 import butterknife.ButterKnife;
@@ -56,6 +59,12 @@ public class ExhibitDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.item_exhibit, container, false);
         ButterKnife.inject(getActivity());
+        FloatingActionButton fabButton = new FloatingActionButton.Builder(getActivity())
+                .withDrawable(getResources().getDrawable(R.drawable.ic_plus))
+                .withButtonColor(Color.TRANSPARENT)
+                .withGravity(Gravity.BOTTOM | Gravity.RIGHT)
+                .withMargins(0, 0, 0, 0)
+                .create();        
         return  view;
     }
 
