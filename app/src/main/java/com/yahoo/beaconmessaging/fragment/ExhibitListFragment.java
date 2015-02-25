@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.yahoo.beaconmessaging.R;
 import com.yahoo.beaconmessaging.adapter.ExhibitRecyclerAdapter;
 import com.yahoo.beaconmessaging.model.Exhibit;
+import com.yahoo.beaconmessaging.ui.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,8 @@ public abstract class ExhibitListFragment extends Fragment {
         exhibitList = new ArrayList<Exhibit>();
         mExhibitRecyclerAdapter  = new ExhibitRecyclerAdapter(exhibitList,this.getActivity());
         mExhibitRecyclerview.setAdapter(mExhibitRecyclerAdapter);
+        RecyclerView.ItemDecoration itemDecoration =
+                new DividerItemDecoration(this.getActivity(), DividerItemDecoration.VERTICAL_LIST);
         return view;
     }
 
