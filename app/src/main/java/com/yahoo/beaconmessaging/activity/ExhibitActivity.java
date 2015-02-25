@@ -36,6 +36,7 @@ public class ExhibitActivity extends BaseActivity {
                 if (e == null) {
                     // item was found 
                     mExhibit = exhibit;
+                    mExhibitDetailFragment.populateView(mExhibit);
                 }
             }
         });
