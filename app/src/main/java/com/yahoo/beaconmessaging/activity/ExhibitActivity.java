@@ -1,6 +1,8 @@
 package com.yahoo.beaconmessaging.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -8,11 +10,16 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.yahoo.beaconmessaging.R;
+import com.yahoo.beaconmessaging.fragment.ExhibitDetailFragment;
+import com.yahoo.beaconmessaging.fragment.PostsStreamFragment;
 import com.yahoo.beaconmessaging.model.Exhibit;
 
 
 public class ExhibitActivity extends BaseActivity {
     private Exhibit mExhibit;
+    private ExhibitDetailFragment mExhibitDetailFragment;
+    private PostsStreamFragment mPostsStreamFragment;
+    private FragmentManager mFragmentManager;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,13 @@ public class ExhibitActivity extends BaseActivity {
                 }
             }
         });
+        mExhibitDetailFragment = ExhibitDetailFragment.newInstance(mExhibit);
+        mFragmentManager = getSupportFragmentManager();
+        //begin the transaction
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.flExhibitContainer,mExhibitDetailFragment);
+        fragmentTransaction.commit();
+
 
     }
 

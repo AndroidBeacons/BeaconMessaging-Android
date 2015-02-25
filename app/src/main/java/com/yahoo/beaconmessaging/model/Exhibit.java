@@ -6,8 +6,6 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import org.parceler.Parcel;
-
 import java.io.File;
 import java.util.List;
 
