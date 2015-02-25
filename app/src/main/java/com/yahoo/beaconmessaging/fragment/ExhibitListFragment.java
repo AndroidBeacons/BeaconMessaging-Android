@@ -2,12 +2,12 @@ package com.yahoo.beaconmessaging.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
@@ -18,9 +18,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.yahoo.beaconmessaging.R;
+import com.yahoo.beaconmessaging.activity.ExhibitActivity;
 import com.yahoo.beaconmessaging.adapter.ExhibitRecyclerAdapter;
 import com.yahoo.beaconmessaging.model.Exhibit;
 import com.yahoo.beaconmessaging.ui.DividerItemDecoration;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +86,10 @@ public abstract class ExhibitListFragment extends Fragment {
             public void onClick(View view, int position) {
                 //Do something on click 
                 view.playSoundEffect(SoundEffectConstants.CLICK);
-                Toast.makeText(getActivity(), "click detected on position: "+position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), ExhibitActivity.class);
+                intent.putExtra("exhibitId",exhibitList.get(position).getObjectId());
+                startActivity(intent);
+                //Toast.makeText(getActivity(), "click detected on position: "+position, Toast.LENGTH_SHORT).show();
                         
             }
 
@@ -92,7 +97,7 @@ public abstract class ExhibitListFragment extends Fragment {
             public void onLongClick(View view, int position) {
                 view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
                 //For now lets not do anything if its on click
-                Toast.makeText(getActivity(), "Long click detected on position:"+position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Long click detected on position:"+position, Toast.LENGTH_SHORT).show();
             }
         }));
 

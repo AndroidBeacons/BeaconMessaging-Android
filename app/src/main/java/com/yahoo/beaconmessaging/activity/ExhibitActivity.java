@@ -1,19 +1,38 @@
 package com.yahoo.beaconmessaging.activity;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.yahoo.beaconmessaging.R;
+import com.yahoo.beaconmessaging.model.Exhibit;
 
 
 public class ExhibitActivity extends BaseActivity {
-
+    private Exhibit mExhibit;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exhibit);
+        String exhibitId = getIntent().getStringExtra("exhibitId");
+        ParseQuery<Exhibit> query = ParseQuery.getQuery(Exhibit.class);
+        //TODO see how you can use cache and not network everytime
+        // First try to find from the cache and only then go to network
+        // query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
+        // Execute the query to find the object with ID
+        query.getInBackground(exhibitId, new GetCallback<Exhibit>() {
+            public void done(Exhibit exhibit, ParseException e) {
+                if (e == null) {
+                    // item was found 
+                    mExhibit = exhibit;
+                }
+            }
+        });
+
     }
 
 
