@@ -2,7 +2,7 @@ package com.yahoo.beaconmessaging.fragment;
 
 
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -59,6 +59,7 @@ public abstract class ExhibitListFragment extends Fragment {
         mExhibitRecyclerview.setLayoutManager(layoutManager);
         
         // Bind adapter to recycler
+        exhibitList = new ArrayList<Exhibit>();
         mExhibitRecyclerAdapter  = new ExhibitRecyclerAdapter(exhibitList);
         mExhibitRecyclerview.setAdapter(mExhibitRecyclerAdapter);
         return view;
