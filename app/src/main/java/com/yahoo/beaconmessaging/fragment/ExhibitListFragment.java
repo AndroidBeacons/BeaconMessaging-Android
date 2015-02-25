@@ -50,6 +50,12 @@ public abstract class ExhibitListFragment extends Fragment {
         //setup the views
         setupSwipeRefresh(view);
         
+        //setup the recyclerview adapter
+        setupRecycleViewAdapter(view);
+        return view;
+    }
+
+    protected void setupRecycleViewAdapter(View view) {
         // Inflate the layout for this fragment
         mExhibitRecyclerview = (RecyclerView) view.findViewById(R.id.rvExhibits);
 
@@ -58,15 +64,16 @@ public abstract class ExhibitListFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.scrollToPosition(0);
         mExhibitRecyclerview.setLayoutManager(layoutManager);
-        
+
         // Bind adapter to recycler
         exhibitList = new ArrayList<Exhibit>();
         mExhibitRecyclerAdapter  = new ExhibitRecyclerAdapter(exhibitList,this.getActivity());
         mExhibitRecyclerview.setAdapter(mExhibitRecyclerAdapter);
         RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecoration(this.getActivity(), DividerItemDecoration.VERTICAL_LIST);
-        return view;
+        mExhibitRecyclerview.addItemDecoration(itemDecoration);
     }
+    
 
     /**
      * * Private Methods
