@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.yahoo.beaconmessaging.api.ExhibitClient;
 import com.yahoo.beaconmessaging.model.Exhibit;
 
 import java.util.List;
@@ -29,11 +30,10 @@ public class PopularExhibitListFragment extends ExhibitListFragment {
     /*Send the api request and then call addExhibits*/
     @Override
     protected void populateStream() {
-        Exhibit.getPopularExhibits(new FindCallback<Exhibit>() {
+        ExhibitClient.getPopularExhibits(new FindCallback<Exhibit>() {
             @Override
             public void done(List<Exhibit> exhibits, ParseException e) {
-                if (e != null)
-                {
+                if (e != null) {
                     addExhibits(exhibits);
                 }
             }

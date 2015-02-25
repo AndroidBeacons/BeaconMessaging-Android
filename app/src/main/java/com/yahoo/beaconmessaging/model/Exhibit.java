@@ -6,6 +6,8 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import org.parceler.Parcel;
+
 import java.io.File;
 import java.util.List;
 
@@ -52,12 +54,5 @@ public class Exhibit extends ParseObject {
         put("postCount", postCount);
     }
 
-  
-    
-    public static void getPopularExhibits(FindCallback<Exhibit> findCallback)
-    {
-        ParseQuery<Exhibit> query = ParseQuery.getQuery(Exhibit.class);
-        query.whereEqualTo("featured", true);
-        query.findInBackground(findCallback);
-    }
+ 
 }
