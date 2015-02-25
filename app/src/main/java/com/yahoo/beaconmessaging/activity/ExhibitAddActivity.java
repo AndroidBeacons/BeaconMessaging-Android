@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -33,11 +34,12 @@ import java.io.IOException;
 import java.util.Random;
 
 
-public class ExhibitAddActivity extends ActionBarActivity {
+public class ExhibitAddActivity extends BaseActivity {
 
     private ImageView ivPicture;
     private EditText edDescription;
     private EditText edTitle;
+    private CheckBox featured;
     private Uri uri;
     private ParseFile imageFile;
     private ImageLoaderAndSaver imageLoaderAndSaver;
@@ -49,6 +51,7 @@ public class ExhibitAddActivity extends ActionBarActivity {
         edDescription = (EditText)findViewById(R.id.edDescription);
         edTitle = (EditText)findViewById(R.id.edTitle);
         imageLoaderAndSaver = new ImageLoaderAndSaver(this,ivPicture);
+        featured = (CheckBox)findViewById(R.id.featured);
 //        ParseObject p = new ParseObject("Exhibit");
 
     }
@@ -76,7 +79,7 @@ public class ExhibitAddActivity extends ActionBarActivity {
         exhibit.put("favoriteCount", new Random().nextInt());
         exhibit.put("name", edTitle.getText().toString());
         exhibit.put("description", edDescription.getText().toString());
-
+        exhibit.put("featured", featured.isChecked());
         imageLoaderAndSaver.saveImageAndCall(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -101,7 +104,7 @@ public class ExhibitAddActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_parse_test, menu);
+        getMenuInflater().inflate(R.menu.menu_exhibit_add, menu);
         return true;
     }
 

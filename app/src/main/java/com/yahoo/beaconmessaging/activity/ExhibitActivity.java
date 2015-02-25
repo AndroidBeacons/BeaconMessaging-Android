@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import com.yahoo.beaconmessaging.R;
 
 
-public class ExhibitActivity extends ActionBarActivity {
+public class ExhibitActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
