@@ -3,7 +3,9 @@ package com.yahoo.beaconmessaging.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -16,6 +18,9 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.yahoo.beaconmessaging.R;
+import com.yahoo.beaconmessaging.util.LoginManager;
+
+import java.util.prefs.Preferences;
 
 /**
  * Activity which displays a login screen to the user, offering registration as well.
@@ -24,6 +29,7 @@ public class LoginActivity extends Activity {
   // UI references.
   private EditText usernameEditText;
   private EditText passwordEditText;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -87,28 +93,31 @@ public class LoginActivity extends Activity {
     dialog.setMessage(getString(R.string.progress_login));
     dialog.show();
     // Call the Parse login method
-    ParseUser.logInInBackground(username, password, new LogInCallback() {
-      @Override
-      public void done(ParseUser user, ParseException e) {
-        dialog.dismiss();
-        if (e != null) {
-          // Show the error message
-          Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        } else {
-            Intent intent;
-          // Start an intent for the dispatch activity
-            if (username.equals("admin"))
-            {
-                intent = new Intent(LoginActivity.this, ExhibitAddActivity.class);
-            }
-            else {
-                intent = new Intent(LoginActivity.this, HomeActivity.class);
-            }
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-      }
-    });
-      
+      loginWithUserAndPassword(username, password, dialog, this);
+
   }
+
+    public static void loginWithUserAndPassword(final String username, final String password, final ProgressDialog dialog, final Activity activity) {
+        ParseUser.logInInBackground(username, password, new LogInCallback() {
+            @Override
+            public void done(ParseUser user, ParseException e) {
+                LoginManager.loginComplete(username, password);
+                dialog.dismiss();
+                if (e != null) {
+                    // Show the error message
+                    Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent;
+                    // Start an intent for the dispatch activity
+                    if (username.equals("admin")) {
+                        intent = new Intent(activity, ExhibitAddActivity.class);
+                    } else {
+                        intent = new Intent(activity, HomeActivity.class);
+                    }
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    activity.startActivity(intent);
+                }
+            }
+        });
+    }
 }

@@ -94,7 +94,7 @@ public class ExhibitAddActivity extends ActionBarActivity {
             public void run() {
                 Log.d("ParseTestActivity", "Completed the save of file to server");
                 ParseObject exhibit = ParseObject.create(TestExhibit.class);
-                exhibit.put("favoriteCount", new Random().nextInt());
+                exhibit.put("favoriteCount", 0);
                 exhibit.put("name", edTitle.getText().toString());
                 exhibit.put("description", edDescription.getText().toString());
                 if (imageFile != null && !imageFile.isDirty())

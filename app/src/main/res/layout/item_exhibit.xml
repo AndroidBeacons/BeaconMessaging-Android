@@ -53,6 +53,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
                     android:maxLines="3"
+                    android:ellipsize="end"
                     android:nestedScrollingEnabled="false"
                     android:text="Material Design is stunning!!! Be sure to checkout the other pictures which are in the muesuem.Sometimes you might never know what you can even find okay :)" />
             </LinearLayout>
