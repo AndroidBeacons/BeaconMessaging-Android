@@ -60,7 +60,7 @@ public abstract class ExhibitListFragment extends Fragment {
         
         // Bind adapter to recycler
         exhibitList = new ArrayList<Exhibit>();
-        mExhibitRecyclerAdapter  = new ExhibitRecyclerAdapter(exhibitList);
+        mExhibitRecyclerAdapter  = new ExhibitRecyclerAdapter(exhibitList,this.getActivity());
         mExhibitRecyclerview.setAdapter(mExhibitRecyclerAdapter);
         return view;
     }

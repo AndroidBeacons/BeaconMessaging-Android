@@ -1,11 +1,15 @@
 package com.yahoo.beaconmessaging.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.parse.ParseFile;
+import com.squareup.picasso.Picasso;
 import com.yahoo.beaconmessaging.R;
 import com.yahoo.beaconmessaging.model.Exhibit;
 
@@ -18,14 +22,16 @@ import java.util.List;
 public class ExhibitRecyclerAdapter extends RecyclerView.Adapter<ExhibitRecyclerAdapter.ListItemViewHolder>{
 
     private ArrayList<Exhibit> mExhibitItems;
+    private final Context mContext;
     
     //constructor
-    public ExhibitRecyclerAdapter(ArrayList<Exhibit> items){
+    public ExhibitRecyclerAdapter(ArrayList<Exhibit> items, Context context){
         if (items == null) {
             throw new IllegalArgumentException(
                     "modelData must not be null");
         }
         this.mExhibitItems = items;
+        this.mContext = context;
     }
     
     @Override
@@ -43,10 +49,14 @@ public class ExhibitRecyclerAdapter extends RecyclerView.Adapter<ExhibitRecycler
         Exhibit exhibit = mExhibitItems.get(position);
         holder.tvName.setText(exhibit.getName());
         holder.tvDescription.setText(exhibit.getDescription());
-        holder.tvFavoriteCount.setText(exhibit.getFavoriteCount());
-        holder.tvPostCount.setText(exhibit.getPostCount());
+        holder.tvFavoriteCount.setText(String.valueOf(exhibit.getFavoriteCount()));
+        holder.tvPostCount.setText(String.valueOf(exhibit.getPostCount()));
         //TODO set the image
-        //Picasso holder.ivExhibitImage
+        ParseFile imageUri= exhibit.getImageUri();
+        if(imageUri!=null){
+            Picasso.with(mContext).load(exhibit.getImageUri().getUrl()).into(holder.ivExhibitImage);
+        }
+
     }
 
     @Override
