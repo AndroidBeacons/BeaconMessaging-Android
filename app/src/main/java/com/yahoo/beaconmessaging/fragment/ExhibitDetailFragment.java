@@ -55,7 +55,10 @@ public class ExhibitDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.item_exhibit, container, false);
-        ButterKnife.inject(getActivity());
+        ButterKnife.inject(this,view);
+        /*TextView tempDesc = (TextView)view.findViewById(R.id.tvDescription);
+        tempDesc.setMaxLines(Integer.MAX_VALUE);*/
+        tvDescription.setMaxLines(Integer.MAX_VALUE);
         return  view;
     }
 
