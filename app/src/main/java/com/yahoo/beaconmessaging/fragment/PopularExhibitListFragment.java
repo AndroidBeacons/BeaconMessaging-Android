@@ -34,14 +34,14 @@ public class PopularExhibitListFragment extends ExhibitListFragment {
             public void done(List<Exhibit> exhibits, ParseException e) {
                 if (e != null)
                 {
-                    addExhibits(exhibits,false);
+                    addExhibits(exhibits);
                 }
             }
         });
     }
 
     @Override
-    protected void loadMoreTimeline() {
+    protected void loadMore() {
 
     }
 }

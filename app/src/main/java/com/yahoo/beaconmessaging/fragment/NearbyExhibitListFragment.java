@@ -8,7 +8,7 @@ public class NearbyExhibitListFragment extends ExhibitListFragment {
     }
 
     @Override
-    protected void loadMoreTimeline() {
+    protected void loadMore() {
 
     }
 }

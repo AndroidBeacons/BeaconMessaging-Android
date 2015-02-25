@@ -78,7 +78,7 @@ public abstract class ExhibitListFragment extends Fragment {
                 // Your code to refresh the list here.
                 // Make sure you call swipeContainer.setRefreshing(false)
                 // once the network request has completed successfully.
-                populateStream();
+                refreshStream();
             }
         });
 
@@ -94,27 +94,23 @@ public abstract class ExhibitListFragment extends Fragment {
      * * Protected methods
      * * */
     
-    protected void addExhibits(List<Exhibit> newExhibits, boolean isRefresh){
-        if(isRefresh){
-            /*
-            * exhibitList.clear()
-            * // this should work ? cause of reference bt check if its right way
-            * * * */
-            mExhibitRecyclerAdapter.clearExhibits();
-        }
+    protected void addExhibits(List<Exhibit> newExhibits){
         mExhibitRecyclerAdapter.addItemsToList(newExhibits);// add the items to the adapter
         mExhibitRecyclerAdapter.notifyDataSetChanged(); // notify that the data set is changed
-        if(isRefresh){
-            swipeContainer.setRefreshing(false);
-            mExhibitRecyclerAdapter.notifyDataSetChanged();
-        }
-
     }
 
     //implement sending an api request and then after you get the result,
     // call addExhibits with the data to populate the view
     protected abstract void populateStream();
+    
+    protected void refreshStream(){
+        mExhibitRecyclerAdapter.clearExhibits();
+        populateStream();
+        swipeContainer.setRefreshing(false);
+        mExhibitRecyclerAdapter.notifyDataSetChanged();
+        
+    }
 
-    protected abstract void loadMoreTimeline();//optional?
+    protected abstract void loadMore();//optional?
 
 }
