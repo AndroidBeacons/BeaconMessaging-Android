@@ -40,6 +40,11 @@ public class AddPostFragment extends DialogFragment {
 
 //    private OnFragmentInteractionListener mListener;
 
+    public interface AddPostDialogListener {
+        void onFinishAddPostDialog();
+    }
+
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -56,7 +61,6 @@ public class AddPostFragment extends DialogFragment {
     }
 
     public AddPostFragment() {
-        // Required empty public constructor
     }
 
     private void showCurrentUser()
@@ -121,6 +125,8 @@ public class AddPostFragment extends DialogFragment {
                 if (e == null)
                 {
                     Toast.makeText(getActivity(),"Comment has been posted", Toast.LENGTH_SHORT).show();
+                    AddPostDialogListener listener = (AddPostDialogListener) getActivity();
+                    listener.onFinishAddPostDialog();
                     AddPostFragment.this.dismiss();
                 }
                 else

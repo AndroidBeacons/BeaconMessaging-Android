@@ -38,7 +38,6 @@ public class PostsStreamFragment extends Fragment {
     }
 
     public PostsStreamFragment() {
-
     }
 
     @Override
@@ -143,10 +142,10 @@ public class PostsStreamFragment extends Fragment {
     /**
      * Refresh Stream
      */
-    protected void refreshStream(){
+    public void refreshStream(){
         aPostRecyclerAdapter.clearPosts();
-        // populateStream();
-        swipeContainer.setRefreshing(false);
+        populatePostStream();
+        // swipeContainer.setRefreshing(false);
         aPostRecyclerAdapter.notifyDataSetChanged();
 
     }

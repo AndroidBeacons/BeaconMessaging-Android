@@ -10,12 +10,13 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.yahoo.beaconmessaging.R;
+import com.yahoo.beaconmessaging.fragment.AddPostFragment;
 import com.yahoo.beaconmessaging.fragment.ExhibitDetailFragment;
 import com.yahoo.beaconmessaging.fragment.PostsStreamFragment;
 import com.yahoo.beaconmessaging.model.Exhibit;
 
 
-public class ExhibitActivity extends BaseActivity {
+public class ExhibitActivity extends BaseActivity implements AddPostFragment.AddPostDialogListener {
     private Exhibit mExhibit;
     private ExhibitDetailFragment mExhibitDetailFragment;
     private PostsStreamFragment mPostsStreamFragment;
@@ -76,5 +77,10 @@ public class ExhibitActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFinishAddPostDialog() {
+        mPostsStreamFragment.refreshStream();
     }
 }

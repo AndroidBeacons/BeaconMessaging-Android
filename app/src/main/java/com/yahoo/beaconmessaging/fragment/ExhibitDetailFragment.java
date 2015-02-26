@@ -1,7 +1,6 @@
 package com.yahoo.beaconmessaging.fragment;
 
 
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -17,12 +16,13 @@ import android.widget.TextView;
 import com.parse.ParseFile;
 import com.squareup.picasso.Picasso;
 import com.yahoo.beaconmessaging.R;
-//import com.yahoo.beaconmessaging.button.FloatingActionButton;
 import com.yahoo.beaconmessaging.button.FloatingActionButton;
 import com.yahoo.beaconmessaging.model.Exhibit;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+
+//import com.yahoo.beaconmessaging.button.FloatingActionButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,6 +88,7 @@ public class ExhibitDetailFragment extends Fragment {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 addPostFragment.setStyle(DialogFragment.STYLE_NO_TITLE,0);
                 addPostFragment.show(ft,"dialog");
+                // ft.commit();
             }
         });
         return  view;
