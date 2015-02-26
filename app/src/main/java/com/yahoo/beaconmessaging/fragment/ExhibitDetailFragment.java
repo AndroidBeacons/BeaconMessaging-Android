@@ -4,6 +4,7 @@ package com.yahoo.beaconmessaging.fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.parse.ParseFile;
 import com.squareup.picasso.Picasso;
 import com.yahoo.beaconmessaging.R;
+//import com.yahoo.beaconmessaging.button.FloatingActionButton;
 import com.yahoo.beaconmessaging.button.FloatingActionButton;
 import com.yahoo.beaconmessaging.model.Exhibit;
 
@@ -33,7 +35,7 @@ public class ExhibitDetailFragment extends Fragment {
     @InjectView(R.id.tvFavoriteCount) TextView tvFavoriteCount;
     @InjectView(R.id.tvPostCount) TextView tvPostCount;
     
-    static Exhibit exhibit;
+    Exhibit exhibit;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -42,9 +44,14 @@ public class ExhibitDetailFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static ExhibitDetailFragment newInstance(Exhibit selectedExhibit) {
-        exhibit = selectedExhibit;
         ExhibitDetailFragment fragment = new ExhibitDetailFragment();
+        fragment.exhibit = selectedExhibit;
         return fragment;
+    }
+    
+    private String getExhibitId()
+    {
+        return exhibit.getObjectId();
     }
 
     public ExhibitDetailFragment() {
@@ -71,7 +78,15 @@ public class ExhibitDetailFragment extends Fragment {
                 .withButtonColor(Color.TRANSPARENT)
                 .withGravity(Gravity.BOTTOM | Gravity.RIGHT)
                 .withMargins(0, 0, 0, 0)
-                .create();        
+                .create();
+        fabButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddPostFragment addPostFragment = AddPostFragment.newInstance(getExhibitId());
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                addPostFragment.show(ft,"dialog");
+            }
+        });
         return  view;
     }
 
@@ -80,6 +95,7 @@ public class ExhibitDetailFragment extends Fragment {
     }
 
     public void populateView(Exhibit exhibit) {
+        this.exhibit = exhibit;
         tvName.setText(exhibit.getName());
         tvDescription.setText(exhibit.getDescription());
         tvFavoriteCount.setText(String.valueOf(exhibit.getFavoriteCount()));

@@ -76,7 +76,7 @@ public class ExhibitAddActivity extends BaseActivity {
     public void onAdd(View view)
     {
         final ParseObject exhibit = ParseObject.create(Exhibit.class);
-        exhibit.put("favoriteCount", new Random().nextInt());
+        exhibit.put("favoriteCount", 0);
         exhibit.put("name", edTitle.getText().toString());
         exhibit.put("description", edDescription.getText().toString());
         exhibit.put("featured", featured.isChecked());
