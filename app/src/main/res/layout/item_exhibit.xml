@@ -26,7 +26,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Nature Painting"
+                android:text=".. .. ... ..... .... .... "
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -41,7 +41,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="200dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/nature"
+                    android:src="@drawable/placeholder_image"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp" />
 
@@ -57,7 +57,7 @@
                     android:maxLines="3"
                     android:ellipsize="end"
                     android:nestedScrollingEnabled="false"
-                    android:text="Material Design is stunning!!! Be sure to checkout the other pictures which are in the muesuem.Sometimes you might never know what you can even find okay :)" />
+                    android:text=".. .. . .. .... . . .. . . . . ...   .. . .. . .. .. . .. .... . . .. . . . . ...   .. . .. . .. .. . .. .... . . .. . . . . ...   .. . .. .   .. .. . .. .... . . .. . . . . ...   .. . .. .  .. .. . .. .... . . .. . . . . ...   .. . .. ." />
             </LinearLayout>
 
             <TextView
@@ -69,7 +69,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="20" />
+                android:text="... " />
 
             <TextView
                 android:id="@+id/tvFavorites"
@@ -95,7 +95,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_toEndOf="@+id/tvFavorites"
                 android:layout_toRightOf="@+id/tvFavorites"
-                android:text="55" />
+                android:text="..." />
 
             <TextView
                 android:id="@+id/tvPosts"
