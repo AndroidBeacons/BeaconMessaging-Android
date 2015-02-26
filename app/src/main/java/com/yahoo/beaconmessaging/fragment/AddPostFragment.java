@@ -20,6 +20,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.squareup.picasso.Picasso;
 import com.yahoo.beaconmessaging.R;
+import com.yahoo.beaconmessaging.api.ExhibitClient;
 import com.yahoo.beaconmessaging.model.Post;
 
 
@@ -109,12 +110,12 @@ public class AddPostFragment extends DialogFragment {
 
     public void onAdd(View view)
     {
-        final ParseObject post = ParseObject.create(Post.class);
+        final Post post = ParseObject.create(Post.class);
         post.put("userId", ParseUser.getCurrentUser().getObjectId());
         post.put("description", etPost.getText().toString());
         post.put("exhibitId", exhibitId);
         
-        post.saveInBackground(new SaveCallback() {
+        SaveCallback postSaveCallBack = new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null)
@@ -127,7 +128,9 @@ public class AddPostFragment extends DialogFragment {
                     Toast.makeText(getActivity(),"Error saving comment:" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        };
+
+        ExhibitClient.addPost(post, postSaveCallBack);
         
     }
 
