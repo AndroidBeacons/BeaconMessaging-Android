@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.ParseUser;
 import com.yahoo.beaconmessaging.R;
 import com.yahoo.beaconmessaging.model.Post;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -21,6 +23,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
     private ArrayList<Post> mPostItems;
     private final Context mContext;
+    private HashMap<String,ParseUser> parseUserHashMap;
 
     //constructor
     public PostRecyclerAdapter(ArrayList<Post> items, Context context){
@@ -45,7 +48,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     @Override
     public void onBindViewHolder(ListItemViewHolder holder, int position) {
         Post post = mPostItems.get(position);
-        holder.tvName.setText(post.getUserName());
+        holder.tvName.setText(parseUserHashMap.get(post.getUserId()).getUsername());
         holder.tvPost.setText(post.getPostText());
         // holder.tvFavoriteCount.setText(String.valueOf(exhibit.getFavoriteCount()));
         // holder.tvPostCount.setText(String.valueOf(exhibit.getPostCount()));
@@ -74,9 +77,9 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         }
     }
 
-    public void addItemsToList(List<Post> items){
+    public void addItemsToList(List<Post> items, HashMap<String,ParseUser> parseUserHashMap){
         this.mPostItems.addAll(items);
-
+        this.parseUserHashMap = parseUserHashMap;
     }
 
     public void clearPosts(){

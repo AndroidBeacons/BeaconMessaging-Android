@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseUser;
 import com.yahoo.beaconmessaging.R;
 import com.yahoo.beaconmessaging.adapter.PostRecyclerAdapter;
 import com.yahoo.beaconmessaging.api.ExhibitClient;
 import com.yahoo.beaconmessaging.model.Post;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -51,14 +53,33 @@ public class PostsStreamFragment extends Fragment {
             public void done(List<Post> posts, ParseException e) {
                 if (e == null) {
                     addPosts(posts);
+
                 }
             }
         });
+
     }
 
     protected void addPosts(List<Post> newPosts){
-        aPostRecyclerAdapter.addItemsToList(newPosts);// add the items to the adapter
-        aPostRecyclerAdapter.notifyDataSetChanged(); // notify that the data set is changed
+        this.posts = (ArrayList<Post>) newPosts;
+
+        String[] userIds = new String[posts.size()];
+        int i = 0;
+        for (Post post : posts) {
+            userIds[i++] = post.getUserId();
+        }
+        ExhibitClient.getUsersByList(userIds, new FindCallback<ParseUser>() {
+            @Override
+            public void done(List<ParseUser> parseUsers, ParseException e) {
+                HashMap<String, ParseUser> parseUserHashMap = new HashMap();
+                for (ParseUser parseUser : parseUsers) {
+                    parseUserHashMap.put(parseUser.getObjectId(), parseUser);
+                }
+
+                aPostRecyclerAdapter.addItemsToList(posts, parseUserHashMap);// add the items to the adapter
+                aPostRecyclerAdapter.notifyDataSetChanged(); // notify that the data set is changed
+            }
+        });
     }
 
     @Override

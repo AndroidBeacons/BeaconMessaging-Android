@@ -15,7 +15,7 @@ public class Post extends ParseObject {
         // return getParseFile("imageUri");
     }
 
-    public String getUserName() { return getString("userId"); }
+    public String getUserId() { return getString("userId"); }
 
     public String getPostText() {
         return getString("description");

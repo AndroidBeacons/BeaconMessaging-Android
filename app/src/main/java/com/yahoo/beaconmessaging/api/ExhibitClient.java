@@ -4,13 +4,14 @@ import android.util.Log;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.yahoo.beaconmessaging.model.Exhibit;
 import com.yahoo.beaconmessaging.model.Post;
+
+import java.util.Arrays;
 
 /**
  * Created by saianudeepm on 2/25/15.
@@ -50,5 +51,11 @@ public class ExhibitClient {
         });
 
         post.saveInBackground(saveCallback);
+    }
+
+    public static void getUsersByList(String[] userids, FindCallback<ParseUser> findCallback) {
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereContainedIn("objectId", Arrays.asList(userids));
+        query.findInBackground(findCallback);
     }
 }
