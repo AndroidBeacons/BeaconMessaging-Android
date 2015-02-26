@@ -4,7 +4,7 @@
 
     <!-- Login form -->
     <ImageView
-        android:src="@drawable/nature"
+        android:src="@drawable/city_faded"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
         android:scaleType="fitXY"        
