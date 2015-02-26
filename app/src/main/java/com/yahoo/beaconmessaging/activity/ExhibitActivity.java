@@ -1,10 +1,12 @@
 package com.yahoo.beaconmessaging.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -16,7 +18,8 @@ import com.yahoo.beaconmessaging.fragment.PostsStreamFragment;
 import com.yahoo.beaconmessaging.model.Exhibit;
 
 
-public class ExhibitActivity extends BaseActivity implements AddPostFragment.AddPostDialogListener {
+public class ExhibitActivity extends BaseActivity implements AddPostFragment.AddPostDialogListener,
+                               PostsStreamFragment.ProfileImageClickListener {
     private Exhibit mExhibit;
     private ExhibitDetailFragment mExhibitDetailFragment;
     private PostsStreamFragment mPostsStreamFragment;
@@ -49,7 +52,7 @@ public class ExhibitActivity extends BaseActivity implements AddPostFragment.Add
         fragmentTransaction.replace(R.id.flExhibitContainer,mExhibitDetailFragment);
         fragmentTransaction.commit();
 
-        mPostsStreamFragment = PostsStreamFragment.newInstance(exhibitId, null);
+        mPostsStreamFragment = PostsStreamFragment.newInstance(exhibitId, null, this);
         fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.flPostsContainer, mPostsStreamFragment);
         fragmentTransaction.commit();
@@ -82,5 +85,13 @@ public class ExhibitActivity extends BaseActivity implements AddPostFragment.Add
     @Override
     public void onFinishAddPostDialog() {
         mPostsStreamFragment.refreshStream();
+    }
+
+    @Override
+    public void profileImageClicked(View view) {
+        String userId = (String) view.getTag();
+        Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("user", userId);
+        startActivity(i);
     }
 }

@@ -40,7 +40,7 @@ public class ProfileActivity extends BaseActivity  implements UserDetailFragment
         String userObjectId = getIntent().getStringExtra("user");
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         userDetailFragment = UserDetailFragment.newInstance(userObjectId,this);
-        userPostsStreamFragment = PostsStreamFragment.newInstance(null, userObjectId);
+        userPostsStreamFragment = PostsStreamFragment.newInstance(null, userObjectId, null);
         ft.replace(R.id.flUserDetail, userDetailFragment);
         ft.commit();
         ft = getSupportFragmentManager().beginTransaction();
@@ -117,6 +117,4 @@ public class ProfileActivity extends BaseActivity  implements UserDetailFragment
             }
         });
     }
-
-
 }
