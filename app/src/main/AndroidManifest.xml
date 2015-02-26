@@ -45,10 +45,6 @@
             android:label="@string/title_activity_profile" >
         </activity>
         <activity
-            android:name=".activity.PostsActivity"
-            android:label="@string/title_activity_posts" >
-        </activity>
-        <activity
             android:name=".activity.ExhibitAddActivity"
             android:label="@string/title_activity_exhibit_add" >
         </activity>
