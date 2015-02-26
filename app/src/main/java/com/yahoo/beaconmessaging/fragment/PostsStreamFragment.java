@@ -33,8 +33,16 @@ public class PostsStreamFragment extends Fragment {
     String exhibitId;
     String userId;
 
-    public static PostsStreamFragment newInstance(String exhibitId, String userId) {
+    private ProfileImageClickListener profileImageClickListener;
+
+    public interface ProfileImageClickListener {
+        void profileImageClicked(View view);
+    }
+
+    public static PostsStreamFragment newInstance(String exhibitId, String userId,
+                                        ProfileImageClickListener profileImageClickListener) {
         PostsStreamFragment fragment = new PostsStreamFragment();
+        fragment.profileImageClickListener = profileImageClickListener;
         fragment.exhibitId = exhibitId;
         fragment.userId = userId;
         return fragment;
@@ -88,7 +96,6 @@ public class PostsStreamFragment extends Fragment {
                 for (ParseUser parseUser : parseUsers) {
                     parseUserHashMap.put(parseUser.getObjectId(), parseUser);
                 }
-
                 aPostRecyclerAdapter.addItemsToList(posts, parseUserHashMap);// add the items to the adapter
                 aPostRecyclerAdapter.notifyDataSetChanged(); // notify that the data set is changed
             }
@@ -131,7 +138,7 @@ public class PostsStreamFragment extends Fragment {
         posts = new ArrayList<Post>();
         // Post post = new Post();
         // posts.add(post);
-        aPostRecyclerAdapter  = new PostRecyclerAdapter(posts,this.getActivity());
+        aPostRecyclerAdapter  = new PostRecyclerAdapter(posts,this.getActivity(), profileImageClickListener);
         mPostStreamRecyclerView.setAdapter(aPostRecyclerAdapter);
         /*RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecoration(this.getActivity(), DividerItemDecoration.VERTICAL_LIST);*/

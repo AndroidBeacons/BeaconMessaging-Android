@@ -12,6 +12,7 @@ import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 import com.yahoo.beaconmessaging.R;
+import com.yahoo.beaconmessaging.fragment.PostsStreamFragment;
 import com.yahoo.beaconmessaging.model.Post;
 
 import java.util.ArrayList;
@@ -26,15 +27,18 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     private ArrayList<Post> mPostItems;
     private final Context mContext;
     private HashMap<String,ParseUser> parseUserHashMap;
+    private PostsStreamFragment.ProfileImageClickListener profileImageClickListener;
 
     //constructor
-    public PostRecyclerAdapter(ArrayList<Post> items, Context context){
+    public PostRecyclerAdapter(ArrayList<Post> items, Context context,
+                               PostsStreamFragment.ProfileImageClickListener profileImageClickListener){
         if (items == null) {
             throw new IllegalArgumentException(
                     "modelData must not be null");
         }
         this.mPostItems = items;
         this.mContext = context;
+        this.profileImageClickListener = profileImageClickListener;
     }
 
     @Override
@@ -64,6 +68,15 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             holder.ivPostImage.setImageBitmap(null);
             holder.ivPostImage.getLayoutParams().height = 0;
         }
+        holder.ivProfilePic.setTag(owner.getObjectId());
+        holder.ivProfilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (profileImageClickListener != null) {
+                    profileImageClickListener.profileImageClicked(v);
+                }
+            }
+        });
         // holder.tvFavoriteCount.setText(String.valueOf(exhibit.getFavoriteCount()));
         // holder.tvPostCount.setText(String.valueOf(exhibit.getPostCount()));
     }
