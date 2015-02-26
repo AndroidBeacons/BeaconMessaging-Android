@@ -94,5 +94,5 @@ public class HomeActivity extends BaseActivity {
             return tabTitles[position];
         }
     }
-    
+
 }
