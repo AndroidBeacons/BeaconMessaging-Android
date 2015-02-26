@@ -14,6 +14,7 @@
         android:background="#66666644"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:layout_marginRight="5dp"
@@ -26,7 +27,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/prompt_username"
             android:inputType="textEmailAddress"
-            android:textColor="#4466FF"
+            android:textColor="#cd18171a"
             android:maxLines="1"
             android:singleLine="true" />
 
@@ -37,7 +38,7 @@
             android:hint="@string/prompt_password"
             android:inputType="textPassword"
             android:imeActionId="@+id/edittext_action_login"
-            android:textColor="#4466FF"
+            android:textColor="#cd18171a"
             android:maxLines="1"
             android:singleLine="true"
             android:imeActionLabel="@string/login"
