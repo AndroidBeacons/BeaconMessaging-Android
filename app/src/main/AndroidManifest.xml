@@ -8,6 +8,13 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- Needed permissions in order to scan for beacons. -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    
+    <!-- Declaration that this app is usable on phones with Bluetooth Low Energy. -->
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+    
     <application
         android:name=".BeaconApplication"
         android:allowBackup="true"
@@ -48,6 +55,10 @@
             android:name=".activity.ExhibitAddActivity"
             android:label="@string/title_activity_exhibit_add" >
         </activity>
+
+        <!-- Estimote service responsible for scanning beacons. -->
+        <service android:name="com.estimote.sdk.service.BeaconService"
+            android:exported="false"/>
     </application>
 
 </manifest>
