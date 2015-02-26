@@ -4,13 +4,17 @@
     tools:context="com.yahoo.beaconmessaging.activity.ProfileActivity">
 
 <FrameLayout
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:background="#fffffbff"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/flUserDetail">
-        
     </FrameLayout>
 
 <FrameLayout
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:id="@+id/flUserPosts"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
