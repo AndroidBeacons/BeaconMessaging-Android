@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.yahoo.beaconmessaging.R;
@@ -30,10 +31,12 @@ public class PostsStreamFragment extends Fragment {
     private SwipeRefreshLayout swipeContainer;
 
     String exhibitId;
+    String userId;
 
-    public static PostsStreamFragment newInstance(String exhibitId) {
+    public static PostsStreamFragment newInstance(String exhibitId, String userId) {
         PostsStreamFragment fragment = new PostsStreamFragment();
         fragment.exhibitId = exhibitId;
+        fragment.userId = userId;
         return fragment;
     }
 
@@ -47,19 +50,30 @@ public class PostsStreamFragment extends Fragment {
     }
 
     private void populatePostStream() {
-        ExhibitClient.getCommentsForExhibit(this.exhibitId, new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> posts, ParseException e) {
-                if (e == null) {
-                    addPosts(posts);
+        if (exhibitId != null) {
+            ExhibitClient.getCommentsForExhibit(this.exhibitId, new FindCallback<Post>() {
+                @Override
+                public void done(List<Post> posts, ParseException e) {
+                    if (e == null) {
+                        addPostsForExhibit(posts);
 
+                    }
                 }
-            }
-        });
+            });
+        } else if (userId != null) {
+            ExhibitClient.getCommentsForUser(this.userId, new FindCallback<Post>() {
+                @Override
+                public void done(List<Post> posts, ParseException e) {
+                    if (e == null) {
+                        addPostsForUser(posts);
+                    }
+                }
+            });
+        }
 
     }
 
-    protected void addPosts(List<Post> newPosts){
+    protected void addPostsForExhibit(List<Post> newPosts){
         this.posts = (ArrayList<Post>) newPosts;
 
         String[] userIds = new String[posts.size()];
@@ -75,6 +89,21 @@ public class PostsStreamFragment extends Fragment {
                     parseUserHashMap.put(parseUser.getObjectId(), parseUser);
                 }
 
+                aPostRecyclerAdapter.addItemsToList(posts, parseUserHashMap);// add the items to the adapter
+                aPostRecyclerAdapter.notifyDataSetChanged(); // notify that the data set is changed
+            }
+        });
+    }
+
+    protected void addPostsForUser(List<Post> newPosts){
+        this.posts = (ArrayList<Post>) newPosts;
+
+        String userId = posts.get(0).getUserId();
+        ExhibitClient.getUserById(userId, new GetCallback<ParseUser>() {
+            @Override
+            public void done(ParseUser parseUser, ParseException e) {
+                HashMap<String, ParseUser> parseUserHashMap = new HashMap();
+                parseUserHashMap.put(parseUser.getObjectId(), parseUser);
                 aPostRecyclerAdapter.addItemsToList(posts, parseUserHashMap);// add the items to the adapter
                 aPostRecyclerAdapter.notifyDataSetChanged(); // notify that the data set is changed
             }

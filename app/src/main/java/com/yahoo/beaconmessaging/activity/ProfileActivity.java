@@ -1,28 +1,22 @@
 package com.yahoo.beaconmessaging.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
-import com.squareup.picasso.Picasso;
 import com.yahoo.beaconmessaging.R;
+import com.yahoo.beaconmessaging.fragment.PostsStreamFragment;
 import com.yahoo.beaconmessaging.fragment.UserDetailFragment;
 import com.yahoo.beaconmessaging.util.ImageLoaderAndSaver;
 
@@ -34,6 +28,7 @@ import java.util.Random;
 public class ProfileActivity extends BaseActivity  implements UserDetailFragment.ImageClickListener {
 
     UserDetailFragment userDetailFragment;
+    PostsStreamFragment userPostsStreamFragment;
     private Uri uri;
     private ImageView ivProfileImage;
     private ImageLoaderAndSaver imageLoaderAndSaver;
@@ -43,10 +38,13 @@ public class ProfileActivity extends BaseActivity  implements UserDetailFragment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         String userObjectId = getIntent().getStringExtra("user");
-        FrameLayout flUserDetail = (FrameLayout)findViewById(R.id.flUserDetail);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         userDetailFragment = UserDetailFragment.newInstance(userObjectId,this);
+        userPostsStreamFragment = PostsStreamFragment.newInstance(null, userObjectId);
         ft.replace(R.id.flUserDetail, userDetailFragment);
+        ft.commit();
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.flUserPosts, userPostsStreamFragment);
         ft.commit();
     }
 

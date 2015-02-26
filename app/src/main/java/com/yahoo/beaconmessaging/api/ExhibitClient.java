@@ -31,7 +31,14 @@ public class ExhibitClient {
         query.whereEqualTo("exhibitId", exhibitId);
         query.findInBackground( postFindCallback);
     }
-    
+
+    public static void  getCommentsForUser(String userObjectId, FindCallback<Post> postFindCallback)
+    {
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        query.whereEqualTo("userId", userObjectId);
+        query.findInBackground( postFindCallback);
+    }
+
     public static void addPost(Post post, SaveCallback saveCallback)
     {
         ParseUser user = ParseUser.getCurrentUser();
@@ -57,5 +64,10 @@ public class ExhibitClient {
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereContainedIn("objectId", Arrays.asList(userids));
         query.findInBackground(findCallback);
+    }
+
+    public static void getUserById(String userId, GetCallback<ParseUser> getCallback) {
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query. getInBackground(userId, getCallback);
     }
 }

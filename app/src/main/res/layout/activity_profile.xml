@@ -9,4 +9,11 @@
     android:id="@+id/flUserDetail">
         
     </FrameLayout>
+
+<FrameLayout
+    android:id="@+id/flUserPosts"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/flUserDetail">
+    </FrameLayout>
 </RelativeLayout>
