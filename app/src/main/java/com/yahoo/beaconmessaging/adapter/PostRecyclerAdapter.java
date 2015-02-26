@@ -54,8 +54,15 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         holder.tvName.setText(owner.getUsername());
         holder.tvPost.setText(post.getPostText());
         ParseFile profileImage = owner.getParseFile("imageFile");
-        if(profileImage!=null){
+        if (profileImage!=null){
             Picasso.with(mContext).load(profileImage.getUrl()).into(holder.ivProfilePic);
+        }
+        ParseFile postImage = post.getPostImageUrl();
+        if (postImage!=null){
+            Picasso.with(mContext).load(postImage.getUrl()).into(holder.ivPostImage);
+        } else {
+            holder.ivPostImage.setImageBitmap(null);
+            holder.ivPostImage.getLayoutParams().height = 0;
         }
         // holder.tvFavoriteCount.setText(String.valueOf(exhibit.getFavoriteCount()));
         // holder.tvPostCount.setText(String.valueOf(exhibit.getPostCount()));
