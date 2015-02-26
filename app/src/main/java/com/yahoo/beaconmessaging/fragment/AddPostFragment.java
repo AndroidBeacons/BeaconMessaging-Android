@@ -36,6 +36,7 @@ public class AddPostFragment extends DialogFragment {
     private String mParam1;
     private String mParam2;
     private EditText etPost;
+    private Button btnPost;
     private TextView tvCurrentUser;
     private ImageView ivCurrentUserProfileImage;
 
@@ -106,7 +107,7 @@ public class AddPostFragment extends DialogFragment {
             }
         });
         
-        Button btnPost = (Button)v.findViewById(R.id.btnPost);
+        btnPost = (Button)v.findViewById(R.id.btnPost);
         btnPost.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
@@ -130,6 +131,7 @@ public class AddPostFragment extends DialogFragment {
         post.put("userId", ParseUser.getCurrentUser().getObjectId());
         post.put("description", etPost.getText().toString());
         post.put("exhibitId", exhibitId);
+        btnPost.setClickable(false);
         
         SaveCallback postSaveCallBack = new SaveCallback() {
             @Override
@@ -142,8 +144,9 @@ public class AddPostFragment extends DialogFragment {
                     AddPostFragment.this.dismiss();
                 }
                 else
-                {
+                {   
                     Toast.makeText(getActivity(),"Error saving comment:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    btnPost.setClickable(true);
                 }
             }
         };
