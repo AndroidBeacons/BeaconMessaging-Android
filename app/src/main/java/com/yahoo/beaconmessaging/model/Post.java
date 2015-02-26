@@ -1,51 +1,28 @@
 package com.yahoo.beaconmessaging.model;
 
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 
 @ParseClassName("Post")
 public class Post extends ParseObject {
-    String userName;
-    String postText;
-    String profilePicUrl;
-    String postImageUrl;
 
     public Post() {
-        userName = "user";
-        postText = "this is a sample post";
-        profilePicUrl = "http://testurl";
-        postImageUrl = "http://testurl";
     }
 
     public String getProfilePicUrl() {
-        return profilePicUrl;
+        return "http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png";
+        // return getParseFile("imageUri");
     }
 
-    public void setProfilePicUrl(String profilePicUrl) {
-        this.profilePicUrl = profilePicUrl;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    public String getUserName() { return getString("userId"); }
 
     public String getPostText() {
-        return postText;
+        return getString("description");
     }
 
-    public void setPostText(String postText) {
-        this.postText = postText;
+    public ParseFile getPostImageUrl() {
+        return getParseFile("imageUri");
     }
 
-    public String getPostImageUrl() {
-        return postImageUrl;
-    }
-
-    public void setPostImageUrl(String postImageUrl) {
-        this.postImageUrl = postImageUrl;
-    }
 }

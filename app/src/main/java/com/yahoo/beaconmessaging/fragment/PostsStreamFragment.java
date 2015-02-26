@@ -10,11 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.yahoo.beaconmessaging.R;
 import com.yahoo.beaconmessaging.adapter.PostRecyclerAdapter;
+import com.yahoo.beaconmessaging.api.ExhibitClient;
 import com.yahoo.beaconmessaging.model.Post;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class PostsStreamFragment extends Fragment {
@@ -23,8 +27,12 @@ public class PostsStreamFragment extends Fragment {
     private PostRecyclerAdapter aPostRecyclerAdapter;
     private SwipeRefreshLayout swipeContainer;
 
-    public static PostsStreamFragment newInstance() {
-        return new PostsStreamFragment();
+    String exhibitId;
+
+    public static PostsStreamFragment newInstance(String exhibitId) {
+        PostsStreamFragment fragment = new PostsStreamFragment();
+        fragment.exhibitId = exhibitId;
+        return fragment;
     }
 
     public PostsStreamFragment() {
@@ -34,7 +42,23 @@ public class PostsStreamFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        populatePostStream();
+    }
 
+    private void populatePostStream() {
+        ExhibitClient.getCommentsForExhibit(this.exhibitId, new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> posts, ParseException e) {
+                if (e == null) {
+                    addPosts(posts);
+                }
+            }
+        });
+    }
+
+    protected void addPosts(List<Post> newPosts){
+        aPostRecyclerAdapter.addItemsToList(newPosts);// add the items to the adapter
+        aPostRecyclerAdapter.notifyDataSetChanged(); // notify that the data set is changed
     }
 
     @Override
@@ -56,8 +80,8 @@ public class PostsStreamFragment extends Fragment {
 
         // Bind adapter to recycler
         posts = new ArrayList<Post>();
-        Post post = new Post();
-        posts.add(post);
+        // Post post = new Post();
+        // posts.add(post);
         aPostRecyclerAdapter  = new PostRecyclerAdapter(posts,this.getActivity());
         mPostStreamRecyclerView.setAdapter(aPostRecyclerAdapter);
         /*RecyclerView.ItemDecoration itemDecoration =

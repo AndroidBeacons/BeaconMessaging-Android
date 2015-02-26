@@ -48,7 +48,7 @@ public class ExhibitActivity extends BaseActivity {
         fragmentTransaction.replace(R.id.flExhibitContainer,mExhibitDetailFragment);
         fragmentTransaction.commit();
 
-        mPostsStreamFragment = PostsStreamFragment.newInstance();
+        mPostsStreamFragment = PostsStreamFragment.newInstance(exhibitId);
         fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.flPostsContainer, mPostsStreamFragment);
         fragmentTransaction.commit();

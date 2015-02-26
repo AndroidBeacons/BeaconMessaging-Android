@@ -1,13 +1,8 @@
 package com.yahoo.beaconmessaging.model;
 
-import com.parse.FindCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
-
-import java.io.File;
-import java.util.List;
 
 @ParseClassName("Exhibit")
 public class Exhibit extends ParseObject {
@@ -51,6 +46,5 @@ public class Exhibit extends ParseObject {
     public void setPostCount(int postCount) {
         put("postCount", postCount);
     }
-
 
 }

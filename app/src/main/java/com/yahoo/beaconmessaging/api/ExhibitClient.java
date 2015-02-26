@@ -5,8 +5,6 @@ import com.parse.ParseQuery;
 import com.yahoo.beaconmessaging.model.Exhibit;
 import com.yahoo.beaconmessaging.model.Post;
 
-import java.util.List;
-
 /**
  * Created by saianudeepm on 2/25/15.
  */
