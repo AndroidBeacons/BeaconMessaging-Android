@@ -1,8 +1,8 @@
 package com.yahoo.beaconmessaging.fragment;
 
-import android.app.Activity;
-import android.net.Uri;
+import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,7 +89,7 @@ public class AddPostFragment extends DialogFragment {
             }
         });
         
-        Button btnPost = (Button)v.findViewById(R.id.btnTweet);
+        Button btnPost = (Button)v.findViewById(R.id.btnPost);
         btnPost.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
@@ -135,6 +135,12 @@ public class AddPostFragment extends DialogFragment {
     {
         dismiss();
     }
-    
 
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog d = super.onCreateDialog(savedInstanceState);
+//        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        return d;
+    }
 }

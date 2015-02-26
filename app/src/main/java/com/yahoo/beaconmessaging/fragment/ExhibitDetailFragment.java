@@ -1,8 +1,10 @@
 package com.yahoo.beaconmessaging.fragment;
 
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
@@ -84,6 +86,7 @@ public class ExhibitDetailFragment extends Fragment {
             public void onClick(View v) {
                 AddPostFragment addPostFragment = AddPostFragment.newInstance(getExhibitId());
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
+                addPostFragment.setStyle(DialogFragment.STYLE_NO_TITLE,0);
                 addPostFragment.show(ft,"dialog");
             }
         });
