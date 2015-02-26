@@ -60,7 +60,8 @@
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
                 android:background="@drawable/shape_fancy_button"
-                android:text="@string/signup" />
+                android:text="@string/signup"
+                android:textColor="#fffffbff" />
         </LinearLayout>
 
 </merge>

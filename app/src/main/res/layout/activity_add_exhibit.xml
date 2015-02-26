@@ -68,23 +68,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Photo"
+        android:textAllCaps="false"
         android:id="@+id/btnImageAdd"
         android:onClick="onImageAdd"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/edDescription"
         android:background="@drawable/shape_fancy_button"
-        android:layout_marginTop="35dp" />
+        android:layout_marginTop="35dp"
+        android:textColor="#fffffbff" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Exhibit"
+        android:textAllCaps="false"
         android:id="@+id/btnAdd"
         android:onClick="onAdd"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/edDescription"
         android:background="@drawable/shape_fancy_button"
-        android:layout_marginTop="35dp" />
+        android:layout_marginTop="35dp"
+        android:textColor="#fffffbff" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -92,6 +96,15 @@
         android:id="@+id/ivPicture"
         android:layout_below="@+id/btnImageAdd"
         android:layout_centerHorizontal="true" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pbLoading"
+        android:layout_alignTop="@+id/tvDescription"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        />
 
 
 </RelativeLayout>

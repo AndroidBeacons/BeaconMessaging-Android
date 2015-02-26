@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.parse.ParseException;
@@ -43,6 +44,7 @@ public class ExhibitAddActivity extends BaseActivity {
     private Uri uri;
     private ParseFile imageFile;
     private ImageLoaderAndSaver imageLoaderAndSaver;
+    private ProgressBar pbLoading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,11 @@ public class ExhibitAddActivity extends BaseActivity {
         edTitle = (EditText)findViewById(R.id.edTitle);
         imageLoaderAndSaver = new ImageLoaderAndSaver(this,ivPicture);
         featured = (CheckBox)findViewById(R.id.featured);
-//        ParseObject p = new ParseObject("Exhibit");
+        
+        // on some click or some loading we need to wait for...
+        pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
+
+        // ParseObject p = new ParseObject("Exhibit");
 
     }
 
@@ -80,6 +86,7 @@ public class ExhibitAddActivity extends BaseActivity {
         exhibit.put("name", edTitle.getText().toString());
         exhibit.put("description", edDescription.getText().toString());
         exhibit.put("featured", featured.isChecked());
+        pbLoading.setVisibility(ProgressBar.VISIBLE);
         imageLoaderAndSaver.saveImageAndCall(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -87,6 +94,7 @@ public class ExhibitAddActivity extends BaseActivity {
                 exhibit.saveInBackground( new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
+                        pbLoading.setVisibility(ProgressBar.INVISIBLE);
                         if (e == null)
                         {
                             clearFieldsAfterSave();

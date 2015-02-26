@@ -58,6 +58,7 @@ public class HomeActivity extends BaseActivity {
             ParseUser currentUser = ParseUser.getCurrentUser();
             i.putExtra("user", currentUser.getObjectId());
             startActivity(i);
+            overridePendingTransition(R.anim.right_in, R.anim.left_out);
         }
 
         return super.onOptionsItemSelected(item);
