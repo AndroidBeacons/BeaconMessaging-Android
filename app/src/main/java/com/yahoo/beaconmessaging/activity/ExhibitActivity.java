@@ -42,6 +42,7 @@ public class ExhibitActivity extends BaseActivity {
         });
         mExhibitDetailFragment = ExhibitDetailFragment.newInstance(mExhibit);
         mFragmentManager = getSupportFragmentManager();
+        mFragmentManager = getSupportFragmentManager();
         //begin the transaction
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.flExhibitContainer,mExhibitDetailFragment);

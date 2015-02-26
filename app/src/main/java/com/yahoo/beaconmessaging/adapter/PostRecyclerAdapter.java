@@ -45,8 +45,8 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     @Override
     public void onBindViewHolder(ListItemViewHolder holder, int position) {
         Post post = mPostItems.get(position);
-        // holder.tvName.setText(post.getName());
-        // holder.tvDescription.setText(exhibit.getDescription());
+        holder.tvName.setText(post.getUserName());
+        holder.tvPost.setText(post.getPostText());
         // holder.tvFavoriteCount.setText(String.valueOf(exhibit.getFavoriteCount()));
         // holder.tvPostCount.setText(String.valueOf(exhibit.getPostCount()));
         //TODO set the image

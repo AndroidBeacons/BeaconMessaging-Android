@@ -56,7 +56,8 @@ public class PostsStreamFragment extends Fragment {
 
         // Bind adapter to recycler
         posts = new ArrayList<Post>();
-        posts.add(new Post());
+        Post post = new Post();
+        posts.add(post);
         aPostRecyclerAdapter  = new PostRecyclerAdapter(posts,this.getActivity());
         mPostStreamRecyclerView.setAdapter(aPostRecyclerAdapter);
         /*RecyclerView.ItemDecoration itemDecoration =

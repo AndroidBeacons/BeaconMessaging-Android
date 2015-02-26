@@ -6,7 +6,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:id="@+id/rvPostStream"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
