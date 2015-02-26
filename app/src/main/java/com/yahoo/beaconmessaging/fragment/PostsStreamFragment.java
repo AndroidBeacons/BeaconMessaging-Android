@@ -2,66 +2,107 @@ package com.yahoo.beaconmessaging.fragment;
 
 
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.yahoo.beaconmessaging.R;
+import com.yahoo.beaconmessaging.adapter.PostRecyclerAdapter;
+import com.yahoo.beaconmessaging.model.Post;
+
+import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PostsStreamFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class PostsStreamFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private ArrayList<Post> posts;
+    private RecyclerView mPostStreamRecyclerView;
+    private PostRecyclerAdapter aPostRecyclerAdapter;
+    private SwipeRefreshLayout swipeContainer;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PostsStreamFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PostsStreamFragment newInstance(String param1, String param2) {
-        PostsStreamFragment fragment = new PostsStreamFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static PostsStreamFragment newInstance() {
+        return new PostsStreamFragment();
     }
 
     public PostsStreamFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_posts_stream, container, false);
+
+        // setup the views
+        // setupSwipeRefresh(view);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_posts_stream, container, false);
+        mPostStreamRecyclerView = (RecyclerView) view.findViewById(R.id.rvPostStream);
+
+        // Setup item layout
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.scrollToPosition(0);
+        mPostStreamRecyclerView.setLayoutManager(layoutManager);
+
+        // Bind adapter to recycler
+        posts = new ArrayList<Post>();
+        posts.add(new Post());
+        aPostRecyclerAdapter  = new PostRecyclerAdapter(posts,this.getActivity());
+        mPostStreamRecyclerView.setAdapter(aPostRecyclerAdapter);
+        /*RecyclerView.ItemDecoration itemDecoration =
+                new DividerItemDecoration(this.getActivity(), DividerItemDecoration.VERTICAL_LIST);*/
+        return view;
+    }
+
+    /**
+     * Setup Swipe Refresh
+     * @param view
+     */
+
+    /*private void setupSwipeRefresh(View view) {
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                refreshStream();
+            }
+        });
+
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+    }*/
+
+    /*//implement sending an api request and then after you get the result,
+    // call posts with the data to populate the view
+    protected abstract void populateStream();*/
+
+    /**
+     * Refresh Stream
+     */
+    protected void refreshStream(){
+        aPostRecyclerAdapter.clearPosts();
+        // populateStream();
+        swipeContainer.setRefreshing(false);
+        aPostRecyclerAdapter.notifyDataSetChanged();
+
     }
 
 

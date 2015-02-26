@@ -20,7 +20,7 @@ public class ExhibitActivity extends BaseActivity {
     private ExhibitDetailFragment mExhibitDetailFragment;
     private PostsStreamFragment mPostsStreamFragment;
     private FragmentManager mFragmentManager;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +34,7 @@ public class ExhibitActivity extends BaseActivity {
         query.getInBackground(exhibitId, new GetCallback<Exhibit>() {
             public void done(Exhibit exhibit, ParseException e) {
                 if (e == null) {
-                    // item was found 
+                    // item was found
                     mExhibit = exhibit;
                     mExhibitDetailFragment.populateView(mExhibit);
                 }
@@ -47,6 +47,10 @@ public class ExhibitActivity extends BaseActivity {
         fragmentTransaction.replace(R.id.flExhibitContainer,mExhibitDetailFragment);
         fragmentTransaction.commit();
 
+        mPostsStreamFragment = PostsStreamFragment.newInstance();
+        fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.flPostsContainer, mPostsStreamFragment);
+        fragmentTransaction.commit();
 
     }
 
