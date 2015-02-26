@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.ParseFile;
 import com.parse.ParseUser;
+import com.squareup.picasso.Picasso;
 import com.yahoo.beaconmessaging.R;
 import com.yahoo.beaconmessaging.model.Post;
 
@@ -48,8 +50,13 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     @Override
     public void onBindViewHolder(ListItemViewHolder holder, int position) {
         Post post = mPostItems.get(position);
-        holder.tvName.setText(parseUserHashMap.get(post.getUserId()).getUsername());
+        ParseUser owner = parseUserHashMap.get(post.getUserId());
+        holder.tvName.setText(owner.getUsername());
         holder.tvPost.setText(post.getPostText());
+        ParseFile profileImage = owner.getParseFile("imageFile");
+        if(profileImage!=null){
+            Picasso.with(mContext).load(profileImage.getUrl()).into(holder.ivProfilePic);
+        }
         // holder.tvFavoriteCount.setText(String.valueOf(exhibit.getFavoriteCount()));
         // holder.tvPostCount.setText(String.valueOf(exhibit.getPostCount()));
         //TODO set the image
