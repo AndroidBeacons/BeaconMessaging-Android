@@ -66,12 +66,6 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         }
         // holder.tvFavoriteCount.setText(String.valueOf(exhibit.getFavoriteCount()));
         // holder.tvPostCount.setText(String.valueOf(exhibit.getPostCount()));
-        //TODO set the image
-        // ParseFile imageUri= exhibit.getImageUri();
-        // if(imageUri!=null){
-        //     Picasso.with(mContext).load(exhibit.getImageUri().getUrl()).into(holder.ivExhibitImage);
-        // }
-
     }
 
     @Override
@@ -81,7 +75,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
 
     class ListItemViewHolder extends RecyclerView.ViewHolder{
         @InjectView(R.id.tvName) TextView tvName;
-        @InjectView(R.id.ivProfilPic) ImageView ivProfilePic;
+        @InjectView(R.id.ivProfilePic) ImageView ivProfilePic;
         @InjectView(R.id.tvPost) TextView tvPost;
         @InjectView(R.id.ivPostImage) ImageView ivPostImage;
 
