@@ -18,6 +18,7 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.parse.codec.binary.StringUtils;
 import com.squareup.picasso.Picasso;
 import com.yahoo.beaconmessaging.R;
 import com.yahoo.beaconmessaging.api.ExhibitClient;
@@ -68,7 +69,18 @@ public class AddPostFragment extends DialogFragment {
         ParseUser parseUser = ParseUser.getCurrentUser();
         ParseFile file = parseUser.getParseFile("imageFile");
         Picasso.with(getActivity()).load(file.getUrl()).into(ivCurrentUserProfileImage);
-        tvCurrentUser.setText(parseUser.getUsername());
+        tvCurrentUser.setText(capitalize(parseUser.getUsername()));
+    }
+
+    private String capitalize(String username) {
+        String[] arr = username.split(" ");
+        StringBuilder sb = new StringBuilder();
+
+        for (String anArr : arr) {
+            sb.append(Character.toUpperCase(anArr.charAt(0)))
+                    .append(anArr.substring(1)).append(" ");
+        }
+        return sb.toString().trim();
     }
 
     @Override
