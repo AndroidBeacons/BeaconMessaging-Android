@@ -108,6 +108,8 @@ public class UserDetailFragment extends Fragment {
                 imageClickListener.setUser(parseUser);
                 tvName.setText(parseUser.getUsername());
                 tvDescription.setText(parseUser.getString("description"));
+                tvFavoriteCount.setText("" + parseUser.getInt("favoriteCount"));
+                tvPostCount.setText("" + parseUser.getInt("postCount"));
                 ParseFile imageFile = parseUser.getParseFile("imageFile");
                 if (imageFile != null)
                 {

@@ -136,6 +136,11 @@ public abstract class ExhibitListFragment extends Fragment {
         mExhibitRecyclerAdapter.addItemsToList(newExhibits);// add the items to the adapter
         mExhibitRecyclerAdapter.notifyDataSetChanged(); // notify that the data set is changed
     }
+    
+    protected void clearExhibits(){
+        mExhibitRecyclerAdapter.clearExhibits();
+        
+    }
 
     //implement sending an api request and then after you get the result,
     // call addExhibits with the data to populate the view
