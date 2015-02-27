@@ -141,6 +141,7 @@ public class NearbyExhibitListFragment extends ExhibitListFragment {
                 @Override
                 public void done(List<Exhibit> exhibits, ParseException e) {
                     //add to the adapter
+                    clearExhibits();
                     addExhibits(exhibits);
                 }
             });
