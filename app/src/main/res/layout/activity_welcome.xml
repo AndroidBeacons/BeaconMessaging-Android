@@ -45,7 +45,8 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/shape_fancy_button"
             android:text="@string/login"
-            android:textColor="#fffffbff" />
+            android:textColor="@android:color/white"
+            />
 
         <Button
             android:id="@+id/signup_button"
