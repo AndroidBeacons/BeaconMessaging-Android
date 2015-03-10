@@ -27,6 +27,7 @@ public class ExhibitClient {
     {
         ParseQuery<Exhibit> query = ParseQuery.getQuery(Exhibit.class);
         query.whereEqualTo("featured", true);
+        query.addDescendingOrder("createdAt");
         query.findInBackground(findCallback);
     }
     
@@ -34,6 +35,7 @@ public class ExhibitClient {
     {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.whereEqualTo("exhibitId", exhibitId);
+        query.addDescendingOrder("createdAt");
         query.findInBackground( postFindCallback);
     }
 
@@ -41,6 +43,7 @@ public class ExhibitClient {
     {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.whereEqualTo("userId", userObjectId);
+        query.addDescendingOrder("createdAt");
         query.findInBackground( postFindCallback);
     }
 
