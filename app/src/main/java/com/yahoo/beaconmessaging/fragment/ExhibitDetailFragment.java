@@ -76,7 +76,7 @@ public class ExhibitDetailFragment extends Fragment {
         //populateView();
         ButterKnife.inject(getActivity());
         FloatingActionButton fabButton = new FloatingActionButton.Builder(getActivity())
-                .withDrawable(getResources().getDrawable(R.drawable.ic_plus))
+                .withDrawable(getResources().getDrawable(R.drawable.fab_ic_add))
                 .withButtonColor(Color.TRANSPARENT)
                 .withGravity(Gravity.BOTTOM | Gravity.RIGHT)
                 .withMargins(0, 0, 0, 0)

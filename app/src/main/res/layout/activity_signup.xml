@@ -1,18 +1,17 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".SignUpActivity" >
+    tools:context=".SignUpActivity"
+    >
 
     <!-- Login form -->
 
     <ImageView
-        android:src="@drawable/city_faded"
+        android:src="@drawable/paper_art"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
-        android:scaleType="fitXY"
-        />
+        android:scaleType="fitXY" />
     <LinearLayout
         android:layout_gravity="center_horizontal|center_vertical"
-        android:background="#66666644"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
@@ -20,40 +19,47 @@
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
         android:paddingBottom="10dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:background="#66523825">
 
             <EditText
                 android:id="@+id/username_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_username"
+                android:textColorHint="#ffa9a9a9"
                 android:textColor="@android:color/white"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:backgroundTint="#ffffffff" />
 
             <EditText
                 android:id="@+id/password_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_password"
+                android:textColorHint="#ffa9a9a9"
                 android:textColor="@android:color/white"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:backgroundTint="#ffffffff" />
             
             <EditText
                 android:id="@+id/password_again_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_password_again"
+                android:textColorHint="#ffa9a9a9"
                 android:textColor="@android:color/white"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:imeActionId="@+id/edittext_action_signup"
                 android:imeActionLabel="@string/signup"
-                android:imeOptions="actionUnspecified" />
+                android:imeOptions="actionUnspecified"
+                android:backgroundTint="#ffffffff" />
 
             <Button
                 android:id="@+id/action_button"

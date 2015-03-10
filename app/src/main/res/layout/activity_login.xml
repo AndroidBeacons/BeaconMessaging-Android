@@ -4,11 +4,11 @@
 
     <!-- Login form -->
     <ImageView
-        android:src="@drawable/city_faded"
+        android:src="@drawable/paper_art"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
-        android:scaleType="fitXY"        
-        />
+        android:scaleType="fitXY"
+        android:adjustViewBounds="false" />
     <LinearLayout
         android:layout_gravity="center_horizontal|center_vertical"
         android:background="#66666644"
