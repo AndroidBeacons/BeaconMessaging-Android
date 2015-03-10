@@ -80,7 +80,7 @@ public abstract class ExhibitListFragment extends Fragment {
         mExhibitRecyclerview.setAdapter(mExhibitRecyclerAdapter);
         RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecoration(this.getActivity(), DividerItemDecoration.VERTICAL_LIST);
-        mExhibitRecyclerview.addItemDecoration(itemDecoration);
+       // mExhibitRecyclerview.addItemDecoration(itemDecoration);
         mExhibitRecyclerview.addOnItemTouchListener(new RecyclerTouchListener(this.getActivity(), mExhibitRecyclerview, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
